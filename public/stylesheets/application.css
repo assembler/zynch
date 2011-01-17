@@ -166,8 +166,8 @@ input:invalid, textarea:invalid {
 /* These selection declarations have to be separate.
    No text-shadow: twitter.com/miketaylr/status/12228805301
    Also: hot pink. */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
+::-moz-selection{ background: #99c6e4; color:#fff; text-shadow: none; }
+::selection { background:#99c6e4; color:#fff; text-shadow: none; }
 
 /*  j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #FF5E99; }
@@ -224,7 +224,29 @@ button {  width: auto; overflow: visible; }
     Author: Milovan Zogovic
  */
 
+body { font-family:'Helvetica Neue', helvetica, arial, sans-serif; background-color:#ddd; } 
 
+#container { width:960px; margin:0 auto; background:#fff; 
+  -webkit-box-shadow: 3px 3px 4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 3px 3px 4px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 4px rgba(0,0,0,0.3); }
+
+#container > header { height:55px; width:100%; border-bottom:2px solid #eee; position:relative; background-color:#fff; }
+#container > header a.logo { display:block; width:104px; height:45px; position:absolute; text-indent:-9999px; background:url(/images/logo.png); top:5px; left:10px; }
+#container > header div.account { position:absolute; bottom:5px; right:10px; }
+
+form p { padding:6px 0; }
+
+#main { padding:10px; min-height:300px; height:auto !important; height:300px; }
+
+body > footer { text-align:center; padding:10px; font-size:11px; }
+
+
+.flash_message { border:1px solid #ccc; padding:10px 10px 10px 35px; margin:10px 0; }
+.flash_message.notice { border-color:green; color:green; background:#ccffcc url(/images/notice.png) no-repeat 5px 50%; }
+.flash_message.alert {  border-color:red; color:red; background:#FFF7BE url(/images/alert.png) no-repeat 5px 50%; }
+
+nav.devise { margin-top:10px; }
 
 
 
