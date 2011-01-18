@@ -1,0 +1,25 @@
+<%= render '/shared/errors', :target => @account %>
+
+<%= simple_form_for @account do |f| %>
+  <h2>General Information</h2>
+  <%= f.input :name %>
+  <%= f.input :domain %>
+  
+  <h2>Contact Information</h2>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  
+  <% if @account.new_record? %>
+  <h2>User Agreement</h2>
+  <div class="eula">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada velit pulvinar eros accumsan ultrices. Curabitur nisi dolor, laoreet in vehicula eu, rhoncus vitae leo. Nulla adipiscing elit mauris, at ullamcorper orci. Phasellus euismod sagittis odio, ac ultricies tortor vestibulum ullamcorper. Aenean id erat eros. Donec ornare egestas sapien vitae molestie. Vivamus id eros et nisi ullamcorper accumsan. Pellentesque sit amet felis metus. Nulla ullamcorper urna id tortor rhoncus a blandit sem adipiscing. In tempus aliquam tellus a lacinia. Morbi magna purus, dignissim sed pulvinar sit amet, suscipit quis nulla.</p>
+    <p>Morbi auctor faucibus augue, at sollicitudin dolor hendrerit et. Proin condimentum, sapien vel auctor consequat, magna nisl convallis libero, eu semper turpis ante in ligula. Donec ligula massa, fermentum vitae mattis laoreet, fermentum vel nibh. Praesent risus ipsum, porttitor tincidunt viverra vitae, rutrum nec massa. Ut quis massa ligula. Donec in elit id odio tincidunt ullamcorper id sed urna. Aliquam velit erat, fermentum et pellentesque eu, aliquet euismod est. Maecenas tincidunt tortor sed lacus egestas fermentum ultrices tellus tincidunt. Pellentesque ullamcorper sodales consectetur. Fusce non nulla quis turpis sodales commodo. Curabitur vel tellus urna, eget luctus turpis. Aliquam erat volutpat.</p>
+    <p>Phasellus viverra congue neque eget lobortis. Etiam metus diam, blandit eu tempus ut, tempor vel erat. Sed lacinia vestibulum eros a varius. Maecenas viverra quam at lectus tincidunt tempus. Mauris commodo justo quis purus ultricies ultricies. Nulla fringilla metus vitae lacus tincidunt imperdiet. Nunc ac est mi, in volutpat libero. Nunc mattis nisi a massa aliquet lacinia vehicula purus blandit. Aliquam at mauris augue. Ut eu urna urna.</p>
+    <p>Aenean aliquam posuere eros vitae eleifend. Sed gravida velit eu urna ultrices tincidunt rutrum nulla lacinia. Maecenas fermentum vehicula nisi eget pretium. Nullam dui mauris, malesuada at sollicitudin non, scelerisque quis augue. Nunc sodales pharetra lorem, id egestas ante elementum nec. Nam sed risus orci. Aliquam velit augue, mattis in suscipit vestibulum, fringilla et libero. Suspendisse vel risus augue. Sed vel nulla mi, a hendrerit quam. Vivamus mi augue, consectetur at vehicula malesuada, pharetra laoreet dolor. Aenean sollicitudin malesuada augue nec eleifend. Sed a ante at tortor scelerisque ullamcorper faucibus at augue. Etiam interdum lorem at lectus malesuada et semper massa varius. Nam ut dictum mi. Etiam iaculis elit vitae massa venenatis sed iaculis tortor porttitor. Curabitur et nisi diam, ut aliquam tortor. Curabitur volutpat luctus augue vitae tempus. Proin consequat tortor nec arcu ultricies ac pharetra diam facilisis. Curabitur porta consectetur iaculis. Pellentesque ac dui ipsum.</p>
+    <p>Pellentesque urna arcu, sollicitudin in porttitor ac, egestas in diam. Duis euismod gravida dignissim. Sed nec ullamcorper nulla. In hac habitasse platea dictumst. Duis tincidunt nunc quis quam faucibus feugiat. Proin ut dui vel lacus porttitor euismod. Duis adipiscing turpis sit amet est tempus vehicula. Aliquam leo orci, semper et gravida vel, placerat a neque. Donec lectus tellus, pellentesque sed condimentum id, feugiat at nunc. Sed eleifend blandit pulvinar. Morbi rutrum nisl sed ante porttitor tincidunt ultrices tortor euismod.</p>
+  </div>
+  <% end %>
+  
+  <%= f.submit (@account.new_record? ? 'Agree and continue' : 'Update information'), :disable_with => 'please wait', :class => 'button' %>
+<% end %>

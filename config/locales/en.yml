@@ -2,4 +2,14 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      account: "account"
+      user: "user"
+    attributes:
+      account:
+        name: "Account Name"
+        domain: "Website's URL"
+        first_name: "First Name"
+        last_name: "Last Name"
+        email: "E-mail address"

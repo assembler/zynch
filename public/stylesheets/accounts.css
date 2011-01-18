@@ -1,0 +1,7 @@
+.new_account { margin-top:10px; }
+table.accounts .name { text-align:left; }
+table.accounts .actions { width:100px; }
+
+div.eula { padding:10px; margin:5px 0 20px; border:1px solid #ccc; width:400px; height:100px; overflow:auto; }
+
+textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #ccc; padding:5px 0 0 5px; margin:10px 0;  }

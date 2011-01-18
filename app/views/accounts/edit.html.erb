@@ -1,0 +1,7 @@
+<% stylesheet 'accounts' %>
+<% title "Edit #{@account.name}" %>
+<%= render :partial => 'form' %>
+
+<h2>Delete account</h2>
+<p>You won't be able to access your reports if you decide to do this.</p>
+<p><%= link_to 'delete this account', account_path(@account), :method => 'delete', :confirm => "Are you sure you want to permanently delete this account?\nThis action is undoable!" %></p>

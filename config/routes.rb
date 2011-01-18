@@ -1,7 +1,16 @@
 Zynch::Application.routes.draw do
   devise_for :users
-
-  root :to => 'welcome#index'
+  
+  resources :visits
+  
+  resources :accounts do
+    member do
+      get 'show_code'
+    end
+  end
+  
+  get '/track' => 'visits#new'
+  root :to => 'accounts#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

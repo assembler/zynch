@@ -1,0 +1,31 @@
+<% stylesheet 'accounts' %>
+<% title 'Accounts' %>
+
+<% if @accounts.empty? %>
+  <p>You currently have no accounts set.</p>
+<% else %>
+  <table class="classic accounts">
+    <thead>
+      <tr>
+        <th class="name">Name</th>
+        <th class="visits">Visits</th>
+        <th class="avg_time">Avg. time</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @accounts.each do |account| %>
+      <tr id="<%= dom_id(account) %>">
+        <td class="name"><%= account.name %></td>
+        <td class="visits"><%= 'X' %></td>
+        <td class="avg_time"><%= 'X' %></td>
+        <td class="actions">
+          <%=link_to 'edit', edit_account_path(account) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%=link_to 'setup new account', new_account_path, :class=>'button new_account' %>

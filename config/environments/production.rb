@@ -1,3 +1,5 @@
+HOST_NAME = 'zynch.zogovic.com'.freeze
+
 Zynch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -36,7 +38,7 @@ Zynch::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'zynch.zogovic.com' }
+  config.action_mailer.default_url_options = { :host => HOST_NAME }
 
   # Enable threaded mode
   # config.threadsafe!

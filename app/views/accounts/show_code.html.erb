@@ -1,0 +1,18 @@
+<% stylesheet 'accounts' %>
+<% title "Code snippet #{@account.name}" %>
+
+<p>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag</p>
+<% content_tag :textarea, :rows => 11, :cols => 120, :class=>'snippet', :readonly => true do %>
+<script type="text/javascript">
+ var _zys = { id: "ZY-<%= '%010d' % @account.id %>" };
+ (function(d, t) {
+  var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  g.async = true;
+  g.src = ('https:' == location.protocol ? 'https://' : 'http://') + '<%= HOST_NAME %>/javascripts/zy.js';
+  s.parentNode.insertBefore(g, s);
+ })(document, 'script');
+</script>
+<% end %>
+
+<p>back to <%=link_to 'account list', accounts_path %></p>
