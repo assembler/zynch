@@ -1,0 +1,19 @@
+<% stylesheet 'accounts' %>
+<% title "#{@account.name} :: dashboard" %>
+
+<div id="dashboard" class="clearfix">
+  <nav>
+    <ul>
+      <li><%=link_to 'dashboard', account_path(@account, :by => nil) %></li>
+      <li><%=link_to 'browsers', account_path(@account, :by => 'browser') %></li>
+      <li><%=link_to 'operating systems', account_path(@account, :by => 'os') %></li>
+      <li><%=link_to 'screen resolutions', account_path(@account, :by => 'screen_resolution') %></li>
+      <li><%=link_to 'flash versions', account_path(@account, :by => 'major_flash_version') %></li>
+      <li><%=link_to 'countries', account_path(@account, :by => 'country_id') %></li>
+      <li><%=link_to 'languages', account_path(@account, :by => 'language') %></li>
+    </ul>
+  </nav>
+  <div class='content <%= @partial %>'>
+    <%= render :partial => @partial %>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div id='visualization'></div>
+
+<script type='text/javascript'>
+  google.load('visualization', '1', { packages:['corechart']});
+  google.setOnLoadCallback(drawVisualization);
+
+  function drawVisualization() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'flash version');
+    data.addColumn('number', 'visits'); 
+    <% @visits.each do |visit| %>
+      data.addRow(['Flash v<%= visit[:major_flash_version] %>', <%= visit[:visits] %>]);
+    <% end %>
+
+    new google.visualization.PieChart(document.getElementById('visualization')).draw(data, {
+      title: 'Visits by flash version'
+    });
+  }
+</script>

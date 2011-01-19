@@ -16,7 +16,7 @@
     <tbody>
       <% @accounts.each do |account| %>
       <tr id="<%= dom_id(account) %>">
-        <td class="name"><%= account.name %></td>
+        <td class="name"><%=link_to account.name, account_path(account) %></td>
         <td class="visits"><%= 'X' %></td>
         <td class="avg_time"><%= 'X' %></td>
         <td class="actions">

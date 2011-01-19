@@ -30,16 +30,14 @@ class VisitsController < ApplicationController
         @visit.country = country
       end
     end
-    
+      
+    @visit.entry_page = page if @visit.entry_page.nil?
+    @visit.exit_page = page
     @visit.save
     
     pageview = @visit.pageviews.build
     pageview.page = page
     pageview.save
-    
-    @visit.entry_pageview = pageview if @visit.entry_pageview.nil?
-    @visit.exit_pageview = pageview
-    @visit.save    
   end
 
 end

@@ -8,6 +8,14 @@ class AccountsController < ApplicationController
   end
   
   def show
+    pages = %w{ browser os screen_resolution major_flash_version country_id language }
+    @partial = 'by_default'
+    if pages.include?(params[:by])
+      @partial = "by_#{params[:by]}"
+      @visits = @account.visits.count_by params[:by]
+    else
+      @visits = @account.visits.select('DATE(created_at) AS day, COUNT(*) AS visits, SUM(pageviews_count) AS hits').group('day').order('day ASC')
+    end
   end
   
   def show_code

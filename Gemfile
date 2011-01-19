@@ -6,4 +6,3 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'nokogiri'
 gem 'simple_form'
-gem "will_paginate", "~> 3.0.pre2"

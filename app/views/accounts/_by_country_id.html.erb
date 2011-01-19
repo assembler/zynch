@@ -1,0 +1,26 @@
+<h2>Visits by country</h2>
+<div id='visualization'></div>
+
+<script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});
+   google.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = new google.visualization.DataTable();
+      data.addRows(6);
+      data.addColumn('string', 'Country');
+      data.addColumn('number', 'Popularity');
+      <% @visits.each do |visit| %>
+        data.addRow(['<%= visit[:country_id] %>', <%= visit[:visits] %>]);
+      <% end %>
+
+      var options = {};
+      options['dataMode'] = 'regions';
+      options['width'] = '750px';
+      options['height'] = '500px';
+
+      var container = document.getElementById('visualization');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(data, options);
+  };
+  </script>

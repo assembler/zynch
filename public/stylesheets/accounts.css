@@ -5,3 +5,9 @@ table.accounts .actions { width:100px; }
 div.eula { padding:10px; margin:5px 0 20px; border:1px solid #ccc; width:400px; height:100px; overflow:auto; }
 
 textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #ccc; padding:5px 0 0 5px; margin:10px 0;  }
+
+#dashboard nav { float:left; width:170px; margin-right:10px; }
+#dashboard div.content { float:left; width:750px;  }
+#dashboard div.content h2 { margin-bottom:10px; }
+#visualization { width:750px; height:300px; }
+.by_country_id #visualization { height:500px; }

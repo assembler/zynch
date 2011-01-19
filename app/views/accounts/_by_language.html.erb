@@ -1,0 +1,19 @@
+<div id='visualization'></div>
+
+<script type='text/javascript'>
+  google.load('visualization', '1', { packages:['corechart']});
+  google.setOnLoadCallback(drawVisualization);
+
+  function drawVisualization() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'language');
+    data.addColumn('number', 'visits'); 
+    <% @visits.each do |visit| %>
+      data.addRow(['<%= visit[:language] %>', <%= visit[:visits] %>]);
+    <% end %>
+
+    new google.visualization.PieChart(document.getElementById('visualization')).draw(data, {
+      title: 'Visits by language'
+    });
+  }
+</script>

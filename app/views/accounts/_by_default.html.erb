@@ -1,0 +1,19 @@
+<h2>Summary of visits and pageviews</h2>
+<div id='visualization'></div>
+
+<script type='text/javascript'>
+  google.load('visualization', '1', {'packages':['annotatedtimeline']});
+  google.setOnLoadCallback(drawVisualization);
+
+  function drawVisualization() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
+    data.addColumn('number', 'Visits'); 
+    data.addColumn('number', 'Pageviews'); 
+    <% @visits.each do |visit| %>
+      data.addRow([new Date(<%= visit[:day].year %>, <%= visit[:day].month %>, <%= visit[:day].day %>), <%= visit[:visits] %>, <%= visit[:hits] %>]);
+    <% end %>
+    
+    new google.visualization.AnnotatedTimeLine(document.getElementById('visualization')).draw(data);
+  }
+</script>
