@@ -1,8 +1,18 @@
 <h2>Summary of visits and pageviews</h2>
-<div id='visualization'></div>
+<div class="visualization" id='overall'></div>
+
+<h3>Visits and pageviews per month</h3>
+<div class="visualization" id='by_month'></div>
+
+<h3>Page views per visit</h3>
+<div class="visualization" id='pageviews_per_visit'></div>
+
+<h3>Visit dutration</h3>
+<div class="visualization" id='visit_dutration'></div>
+
 
 <script type='text/javascript'>
-  google.load('visualization', '1', {'packages':['annotatedtimeline']});
+  google.load('visualization', '1', {'packages':['annotatedtimeline', 'corechart']});
   google.setOnLoadCallback(drawVisualization);
 
   function drawVisualization() {
@@ -11,9 +21,35 @@
     data.addColumn('number', 'Visits'); 
     data.addColumn('number', 'Pageviews'); 
     <% @visits.each do |visit| %>
-      data.addRow([new Date(<%= visit[:day].year %>, <%= visit[:day].month %>, <%= visit[:day].day %>), <%= visit[:visits] %>, <%= visit[:hits] %>]);
+      data.addRow([new Date(<%= visit[:year] %>, <%= visit[:month] %> - 1, <%= visit[:day] %>), <%= visit[:visits] %>, <%= visit[:hits] %>]);
     <% end %>
+    new google.visualization.AnnotatedTimeLine(document.getElementById('overall')).draw(data);
     
-    new google.visualization.AnnotatedTimeLine(document.getElementById('visualization')).draw(data);
+    
+    data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', 'Visits'); 
+    data.addColumn('number', 'Pageviews');
+    <% @monthly_visits.each do |visit| %>
+      data.addRow(["<%=t('date.abbr_month_names')[visit[:month].to_i] %> <%= visit[:year] %>", <%= visit[:visits] %>, <%= visit[:hits] %>]);
+    <% end %>
+    new google.visualization.ColumnChart(document.getElementById('by_month')).draw(data, { hAxis: {title: 'Month'} });
+    
+    
+    data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', 'per visit'); 
+    <% @monthly_visits.each do |visit| %>
+      data.addRow(["<%=t('date.abbr_month_names')[visit[:month].to_i] %> <%= visit[:year] %>", Math.round(<%= visit[:hits] %> * 100.0 / <%= visit[:visits] %>)/100]);
+    <% end %>
+    new google.visualization.ColumnChart(document.getElementById('pageviews_per_visit')).draw(data, { hAxis: {title: 'Month'} });
+    
+    data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', 'duration [s]'); 
+    <% @visit_duration.each do |visit| %>
+      data.addRow(["<%=t('date.abbr_month_names')[visit[:month].to_i] %> <%= visit[:year] %>", <%= visit[:duration].to_i %>]);
+    <% end %>
+    new google.visualization.ColumnChart(document.getElementById('visit_dutration')).draw(data, { hAxis: {title: 'Month'} });
   }
 </script>

@@ -1,5 +1,9 @@
 .new_account { margin-top:10px; }
 table.accounts .name { text-align:left; }
+table.accounts .visits,
+table.accounts .pageviews,
+table.accounts .per_visit,
+table.accounts .avg_time { width:90px;}
 table.accounts .actions { width:100px; }
 
 div.eula { padding:10px; margin:5px 0 20px; border:1px solid #ccc; width:400px; height:100px; overflow:auto; }
@@ -7,7 +11,19 @@ div.eula { padding:10px; margin:5px 0 20px; border:1px solid #ccc; width:400px; 
 textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #ccc; padding:5px 0 0 5px; margin:10px 0;  }
 
 #dashboard nav { float:left; width:170px; margin-right:10px; }
-#dashboard div.content { float:left; width:750px;  }
-#dashboard div.content h2 { margin-bottom:10px; }
-#visualization { width:750px; height:300px; }
-.by_country_id #visualization { height:500px; }
+#dashboard nav li { margin-bottom:2px; }
+#dashboard nav li a { display:block; width:150px; text-decoration:none; background:#eee; padding:3px 10px; color:#999; }
+#dashboard nav li.active a,
+#dashboard nav li a:hover { background:#ddd; color:#333; }
+
+#dashboard div.content { float:left; width:750px; min-height:300px; height:auto !important; height:300px;  }
+#dashboard div.content h2 { margin-bottom:10px; background:#eee; padding:3px 10px; }
+#dashboard div.content h3 { margin:20px 10px 10px; }
+.visualization { width:750px; height:300px; }
+
+.by_country_id .visualization { height:500px; }
+
+.range_selector { position:absolute; height:30px; top:10px; right:15px; text-align:right; }
+.range_selector .showing { font-size:11px; color:#666; }
+.range_selector #range { width:150px; }
+.datepicker { margin:5px 0 0 250px;}

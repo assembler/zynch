@@ -1,4 +1,5 @@
-<div id='visualization'></div>
+<h2>Visits by operating system</h2>
+<div class="visualization" id='visualization'></div>
 
 <script type='text/javascript'>
   google.load('visualization', '1', { packages:['corechart']});
@@ -12,8 +13,6 @@
       data.addRow(['<%= visit[:os] %>', <%= visit[:visits] %>]);
     <% end %>
 
-    new google.visualization.PieChart(document.getElementById('visualization')).draw(data, {
-      title: 'Visits by operating system'
-    });
+    new google.visualization.PieChart(document.getElementById('visualization')).draw(data);
   }
 </script>

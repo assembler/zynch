@@ -1,19 +1,52 @@
 <% stylesheet 'accounts' %>
-<% title "#{@account.name} :: dashboard" %>
+<% title "#{@account.name}" %>
+
+<div class='range_selector'>
+  <% form_tag account_url(@account), :method => 'get' do %>
+    date range: 
+    <%= hidden_field_tag :by, params[:by] %>
+    <%= text_field_tag :range, params[:range], :id => 'range', :autocomplete => 'off' %>
+    <%= submit_tag 'apply' %>
+    <%= submit_tag 'reset', :onclick => "$('#range').val('');" %>
+  <% end %>
+  <span class="showing">
+    showing data from <strong><%=l @start_date, :format => :long %></strong> to <strong><%=l @end_date, :format => :long %></strong>
+  </span>
+</div>
 
 <div id="dashboard" class="clearfix">
   <nav>
     <ul>
-      <li><%=link_to 'dashboard', account_path(@account, :by => nil) %></li>
-      <li><%=link_to 'browsers', account_path(@account, :by => 'browser') %></li>
-      <li><%=link_to 'operating systems', account_path(@account, :by => 'os') %></li>
-      <li><%=link_to 'screen resolutions', account_path(@account, :by => 'screen_resolution') %></li>
-      <li><%=link_to 'flash versions', account_path(@account, :by => 'major_flash_version') %></li>
-      <li><%=link_to 'countries', account_path(@account, :by => 'country_id') %></li>
-      <li><%=link_to 'languages', account_path(@account, :by => 'language') %></li>
+      <%= dashboard_menu_item @account, 'dashboard', nil %>
+      <%= dashboard_menu_item @account, 'entry and exit pages', 'page' %>
+      <%= dashboard_menu_item @account, 'browsers', 'browser' %>
+      <%= dashboard_menu_item @account, 'operating systems', 'os' %>
+      <%= dashboard_menu_item @account, 'screen resolutions', 'screen_resolution' %>
+      <%= dashboard_menu_item @account, 'flash versions', 'major_flash_version' %>
+      <%= dashboard_menu_item @account, 'countries', 'country_id' %>
+      <%= dashboard_menu_item @account, 'languages', 'language' %>
     </ul>
   </nav>
   <div class='content <%= @partial %>'>
     <%= render :partial => @partial %>
   </div>
 </div>
+
+<p>back to <%=link_to 'account list', accounts_path %></p>
+
+<script type="text/javascript">
+  $(function(){ $('#range').DatePicker({
+    date: ['2009-12-28','2010-01-23'],
+    calendars: 3,
+    mode: 'range',
+    onBeforeShow: function(){
+      var val;
+      if(val = $('#range').val()) { 
+        $('#range').DatePickerSetDate(val.split(","), true);
+      }
+    },
+    onChange: function(formated, dates){
+      $('#range').val(formated);
+    }
+  }); });
+</script>

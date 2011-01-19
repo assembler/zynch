@@ -237,7 +237,7 @@ body { font-family:'Helvetica Neue', helvetica, arial, sans-serif; background-co
 
 form p { padding:6px 0; }
 
-#main { padding:15px; min-height:300px; height:auto !important; height:300px; }
+#main { padding:15px; min-height:300px; height:auto !important; height:300px; position:relative; }
 #main h1 { margin-bottom:20px; font-size:18px; font-weight:normal; }
 
 body > footer { text-align:center; padding:10px; font-size:11px; }

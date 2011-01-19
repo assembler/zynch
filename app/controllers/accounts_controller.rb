@@ -8,13 +8,34 @@ class AccountsController < ApplicationController
   end
   
   def show
-    pages = %w{ browser os screen_resolution major_flash_version country_id language }
+    pages = %w{ browser os screen_resolution major_flash_version country_id language page }
     @partial = 'by_default'
+    
+    if params[:range].blank?
+      min_date = @account.visits.minimum('created_at')
+      max_date = @account.visits.maximum('created_at')
+      params[:range] = [min_date, max_date].map { |d| d.to_date.to_s }.join(",")
+    end
+    @start_date, @end_date = params[:range].split(',').map { |d| d.to_date }
+    
+    params[:by] = nil if params[:by].blank?
+    
+    s = @account.visits.where('created_at BETWEEN ? AND ?', @start_date, @end_date)
     if pages.include?(params[:by])
       @partial = "by_#{params[:by]}"
-      @visits = @account.visits.count_by params[:by]
+      
+      case params[:by]
+      when 'page'
+        @entry_visits = s.count_by('entry_page_id').order('visits DESC').limit(5)
+        @exit_visits = s.count_by('exit_page_id').order('visits DESC').limit(5)
+      else
+        @visits = s.count_by(params[:by])
+      end
     else
-      @visits = @account.visits.select('DATE(created_at) AS day, COUNT(*) AS visits, SUM(pageviews_count) AS hits').group('day').order('day ASC')
+      s = s.select('YEAR(created_at) AS year, MONTH(created_at) AS month, DAY(created_at) AS day, COUNT(*) AS visits, SUM(pageviews_count) AS hits')
+      @visits = s.group('year, month, day').order('year, month, day')
+      @monthly_visits = s.group('year, month').order('year, month')
+      @visit_duration = s.select('AVG(DATEDIFF(updated_at, created_at)) AS duration').group('year, month').order('year, month')
     end
   end
   

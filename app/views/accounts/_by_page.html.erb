@@ -1,0 +1,35 @@
+<h2>Entry and exit pages</h2>
+
+<h3>Top 5 entry pages</h3>
+<div class="visualization" id='entry_pages'></div>
+
+<h3>Top 5 exit pages</h3>
+<div class="visualization" id='exit_pages'></div>
+
+<script type='text/javascript'>
+  google.load('visualization', '1', {'packages':['corechart']});
+  google.setOnLoadCallback(drawVisualization);
+
+  function drawVisualization() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Page Title');
+    data.addColumn('number', 'Count'); 
+    <% @entry_visits.each do |visit| %>
+      data.addRow(['<%= visit.entry_page.title %>', <%= visit[:visits] %>]);
+    <% end %>
+    var options = {
+      legend: 'none',
+      hAxis: { title: 'page title' }, 
+      vAxis: { title: 'pageviews', baseline: 0 }
+    }
+    new google.visualization.ColumnChart(document.getElementById('entry_pages')).draw(data, options);
+    
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Page Title');
+    data.addColumn('number', 'Count'); 
+    <% @exit_visits.each do |visit| %>
+      data.addRow(['<%= visit.exit_page.title %>', <%= visit[:visits] %>]);
+    <% end %>
+    new google.visualization.ColumnChart(document.getElementById('exit_pages')).draw(data, options);
+  }
+</script>
