@@ -8,7 +8,7 @@ table.accounts .actions { width:100px; }
 
 div.eula { padding:10px; margin:5px 0 20px; border:1px solid #ccc; width:400px; height:100px; overflow:auto; }
 
-textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #ccc; padding:5px 0 0 5px; margin:10px 0;  }
+textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #ccc; padding:5px 0 0 5px; margin:10px 0; width:95%; }
 
 #dashboard nav { float:left; width:170px; margin-right:10px; }
 #dashboard nav li { margin-bottom:2px; }
@@ -27,6 +27,6 @@ textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #cc
 .range_selector { position:absolute; height:30px; top:10px; right:15px; text-align:right; }
 .range_selector .showing { font-size:11px; color:#666; }
 .range_selector #range { width:150px; }
-.datepicker { margin:5px 0 0 250px;}
+.datepicker { margin:5px 0 0 250px; }
 
 

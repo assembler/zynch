@@ -34,6 +34,6 @@ production:
   reconnect: false
   database: zynch_production
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: zynch
+  password: ZFeYcJfNaxvQZHZE
+  host: localhost

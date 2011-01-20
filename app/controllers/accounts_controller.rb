@@ -50,10 +50,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.csv do 
         @visits = @account.visits.includes([:entry_page, :exit_page])
-        csv_string = CSV.generate do |csv|
-          csv << ['account', 'entry', 'exit', *@visits.first.attributes.map { |k, v| k.to_s }]
+        csv_string = CSV.generate :col_sep => ';' do |csv|
+          csv << ['entry', 'exit', *@visits.first.attributes.map { |k, v| k.to_s }]
           @visits.each do |visit|
-            csv << [@account.name, visit.entry_page.path, visit.exit_page.path, *visit.attributes.map { |k, v| v }]
+            csv << [visit.entry_page.path, visit.exit_page.path, *visit.attributes.map { |k, v| v }]
           end
         end
         filename = @account.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"

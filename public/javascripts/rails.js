@@ -107,7 +107,7 @@
 		}
 	});
 
-	$('form').live('submit.rails', function(e) {
+	$('form').bind('submit.rails', function(e) {
 		var form = $(this);
 		if (!allowAction(form)) return false;
 
@@ -116,6 +116,7 @@
 			return false;
 		} else {
 			disableFormElements(form);
+			return true;
 		}
 	});
 
