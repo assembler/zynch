@@ -49,7 +49,7 @@ class Account < Thor
     ]
     
     puts "generating #{options[:count]} records, please wait..."
-    options[:count].times do |i|
+    options[:count].to_i.times do |i|
       id = (rand() > 0.2) ? account.visits.last.try(:id) : nil
       
       page = pages.sample
