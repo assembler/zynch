@@ -1,5 +1,48 @@
 = Zynch
+[http://zynch.zogovic.com]
 
-== Tasks
-=== to create sample data for an account
+Zynch is a web service that provides real time website analytics.
+Its a demo project done for elance client.
+
+== Authentication
+Authentication is handled with Devise gem
+
+== Tracking
+Similar to google analytics, tracker script is loaded asynchronously.
+Tracker script detects browser features and then creates another request to send those facts to the server.
+Tracker script (zys.js) is minified using google closure compiler API, and then cached using rails page caching. Cache is destroyed on server restart.
+
+By combining javascript information with request headers, various information is being extracted about the user:
+* page url
+* page title and charset
+* screen resolution and color depth
+* flash player version
+* browser language
+* java presence
+* browser type and version
+* operating system
+* ip address and country
+
+Country detection is done on per-session basis using www.geoplugin.net service.
+
+== Statistics
+From acquired data, various real-time statistics are available to user:
+* visits and pageviews per month
+* page views per visit
+* visit duration by month
+* visits and pageviews by day
+* top 5 entry pages
+* top 5 exit pages
+* visits by browser
+* visits by operating system
+* visits by screen resolution
+* visits by flash player version
+* visits by countries
+* visits by languages
+
+Google charting API is used for drawing all reports.
+
+== Thor tasks
+Thor task is created in order to provide some sample data for testing.
+Basic usage is:
 thor account:sample_for account_email -c 100 -e production
