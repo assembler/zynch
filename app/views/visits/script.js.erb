@@ -1,4 +1,6 @@
 (function () {
+  var gateway = '<%= HOST_NAME %><%= zyt_path %>';
+  
   var BrowserDetect = function() {
     var searchString = function (data) {
       for (var i=0;i<data.length;i++)  {
@@ -140,7 +142,7 @@
     var g = d.createElement(t), s = d.getElementsByTagName(t)[0], params = [];
     for(var item in data) params.push(item + '=' + encodeURIComponent(data[item]));
     g.async = true;
-    g.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'localhost:3000/track?' + params.join("&");
+    g.src = ('https:' == location.protocol ? 'https://' : 'http://') + gateway + '?' + params.join("&");
     s.parentNode.insertBefore(g, s);
   })(document, 'script');
   

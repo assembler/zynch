@@ -6,10 +6,13 @@ Zynch::Application.routes.draw do
   resources :accounts do
     member do
       get 'show_code'
+      get 'export'
     end
   end
+
+  get '/zys.js' => 'visits#script', :as => 'zys', :format => :js
+  get '/zyt.js' => 'visits#track', :as => 'zyt', :format => :js
   
-  get '/track' => 'visits#new'
   root :to => 'accounts#index'
   
   # The priority is based upon order of creation:

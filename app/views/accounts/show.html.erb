@@ -2,7 +2,7 @@
 <% title "#{@account.name}" %>
 
 <div class='range_selector'>
-  <% form_tag account_url(@account), :method => 'get' do %>
+  <%= form_tag account_url(@account), :method => 'get' do %>
     date range: 
     <%= hidden_field_tag :by, params[:by] %>
     <%= text_field_tag :range, params[:range], :id => 'range', :autocomplete => 'off' %>
@@ -17,7 +17,7 @@
 <div id="dashboard" class="clearfix">
   <nav>
     <ul>
-      <%= dashboard_menu_item @account, 'dashboard', nil %>
+      <%= dashboard_menu_item @account, 'summary', nil %>
       <%= dashboard_menu_item @account, 'entry and exit pages', 'page' %>
       <%= dashboard_menu_item @account, 'browsers', 'browser' %>
       <%= dashboard_menu_item @account, 'operating systems', 'os' %>
@@ -25,6 +25,9 @@
       <%= dashboard_menu_item @account, 'flash versions', 'major_flash_version' %>
       <%= dashboard_menu_item @account, 'countries', 'country_id' %>
       <%= dashboard_menu_item @account, 'languages', 'language' %>
+      <li class="export">
+        <%= link_to 'export data [csv]', export_account_path(@account, :format => :csv), :target => 'blank' %>
+      </li>
     </ul>
   </nav>
   <div class='content <%= @partial %>'>

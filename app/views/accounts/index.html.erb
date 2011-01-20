@@ -18,11 +18,11 @@
     <tbody>
       <% @accounts.each do |account| %>
       <tr id="<%= dom_id(account) %>">
-        <td class="name"><%=link_to account.name, account_path(account) %></td>
+        <td class="name"><%= account.visits.count.zero? ? account.name : link_to(account.name, account_path(account)) %></td>
         <td class="visits"><%= account.visits.count %></td>
         <td class="pageviews"><%= account.visits.sum(:pageviews_count) %></td>
         <td class="per_visit"><%= '%.2f' % (account.visits.sum(:pageviews_count).to_f / account.visits.count) %></td>
-        <td class="avg_time"><%= account.visits.average("DATEDIFF(updated_at, created_at)").to_i %> s</td>
+        <td class="avg_time"><%=seconds_to_time account.visits.average("TIME_TO_SEC(TIMEDIFF(updated_at, created_at))").to_i %></td>
         <td class="actions">
           <%=link_to 'edit', edit_account_path(account) %>
         </td>

@@ -9,7 +9,7 @@
   var g = d.createElement(t),
       s = d.getElementsByTagName(t)[0];
   g.async = true;
-  g.src = ('https:' == location.protocol ? 'https://' : 'http://') + '<%= HOST_NAME %>/javascripts/zy.js';
+  g.src = ('https:' == location.protocol ? 'https://' : 'http://') + '<%= HOST_NAME %><%= zys_path %>';
   s.parentNode.insertBefore(g, s);
  })(document, 'script');
 </script>

@@ -15,6 +15,7 @@ textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #cc
 #dashboard nav li a { display:block; width:150px; text-decoration:none; background:#eee; padding:3px 10px; color:#999; }
 #dashboard nav li.active a,
 #dashboard nav li a:hover { background:#ddd; color:#333; }
+#dashboard nav li.export a { padding-left:25px; background:url(/images/export.png) no-repeat 5px 50%; line-height:20px; height:20px; color:#333; }
 
 #dashboard div.content { float:left; width:750px; min-height:300px; height:auto !important; height:300px;  }
 #dashboard div.content h2 { margin-bottom:10px; background:#eee; padding:3px 10px; }
@@ -27,3 +28,5 @@ textarea.snippet { font:12px "Monaco", Courier, monospace; border:1px dashed #cc
 .range_selector .showing { font-size:11px; color:#666; }
 .range_selector #range { width:150px; }
 .datepicker { margin:5px 0 0 250px;}
+
+

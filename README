@@ -1,4 +1,0 @@
-== Internal help
-
-=== visits table
-:duration is the difference between created_at and updated_at

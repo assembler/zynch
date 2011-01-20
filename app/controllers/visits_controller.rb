@@ -1,43 +1,33 @@
+require 'net/http'
+require 'uri'
+
 class VisitsController < ApplicationController
-
-  def new
+  caches_page :script, :if => Proc.new { |c| @ought_cache }
+  
+  def script
+    jscode = render_to_string
+    response = Net::HTTP.post_form(URI.parse('http://closure-compiler.appspot.com/compile'), {
+      'js_code' => jscode,
+      'compilation_level' => "SIMPLE_OPTIMIZATIONS",
+      'output_format' => 'text',
+      'output_info' => 'compiled_code'
+    })
+    if response.code.to_s == "200"
+      data = response.body
+      @ought_cache = true
+    else
+      data = jscode
+      @ought_cache = false
+    end
+    send_data(data, :type => 'text/javascript; charset=utf-8')
+  end
+  
+  def track
     @account = Account.find(params[:cl].split("-").last.to_i)
-
-    path = ::Param::parse(params[:pn], :to_s)
-    page = nil
-    unless path.nil?
-      page = @account.pages.find_or_create_by_path(::Param::parse(params[:pn], :to_s))
-      page.host = ::Param::parse(params[:hn], :to_s)
-      page.search = ::Param::parse(params[:ss], :to_s)
-      page.charset = ::Param::parse(params[:cs], :to_s)
-      page.title = ::Param::parse(params[:pt], :to_s)
-      page.save
-    end
-    
-    @visit = @account.visits.find_by_id ::Param::parse(params[:id], :to_i)
-    @new_session = false
-    if @visit.nil? # new session
-      @new_session = true
-      @visit = @account.visits.build
-      @visit.ip_address = request.remote_addr
-      @visit.update_attributes_from_params(params)
-      
-      location = ::Geo.resolve(@visit.ip_address)
-      if !location.nil? and location.country_code
-        country = Country.find_or_create_by_id(location.country_code)
-        country.name = location.country_name
-        country.save
-        @visit.country = country
-      end
-    end
-      
-    @visit.entry_page = page if @visit.entry_page.nil?
-    @visit.exit_page = page
-    @visit.save
-    
-    pageview = @visit.pageviews.build
-    pageview.page = page
-    pageview.save
+    params[:ip] = request.remote_addr
+    @new_session, @visit = @account.track(params)
+    data = @new_session ? %{ (function () { document.cookie = '__zysid=#{@visit.id};path=/'; })(); } : ''
+    send_data(data, :type => 'text/javascript; charset=utf-8')
   end
 
 end
