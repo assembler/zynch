@@ -1,9 +1,12 @@
 class Account < Thor
   
   desc "sample_for", "creates test account and fills it with sample data"
-  method_options :count => 100
+  method_option :count, :default => 100, :aliases => '-c', :desc => 'how many visits you want to generate'
+  method_option :environment, :default => 'development', :aliases => '-e', :desc => 'which environment you want server run'
+  
   def sample_for(email)
     puts "initializing..."
+    ENV["RAILS_ENV"] = options[:environment]
     
     require './config/environment'
     account_name = 'ZynchTestAccount'.freeze
